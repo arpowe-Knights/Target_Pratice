@@ -6,16 +6,16 @@ public class ObjectSlingShot : MonoBehaviour
 {
     public GameObject[] objectsToSlingShot;
     public float slingShotForce = 10f;
-    public Vector2 slingShotDirection = new Vector2(0f, 1f); // Adjust the direction as needed
+    public Vector2 slingShotDirection = new Vector2(0f, 1f); 
 
     private bool gravityEnabled = false;
 
     void Start()
     {
-        SlingShotObjects();
+        // SlingShotObjects();
     }
 
-    void SlingShotObjects()
+    public void SlingShotObjects()
     {
         foreach (GameObject obj in objectsToSlingShot)
         {
@@ -24,7 +24,7 @@ public class ObjectSlingShot : MonoBehaviour
                 // Disable gravity temporarily
                 obj.GetComponent<Rigidbody2D>().gravityScale = 0f;
 
-                // Apply a force to sling-shot the object in the specified direction
+                // Apply a force to sling-shot object(s)
                 Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
@@ -49,7 +49,7 @@ public class ObjectSlingShot : MonoBehaviour
         // Re-enable gravity for all objects
         foreach (GameObject obj in objectsToSlingShot)
         {
-            if (obj != null) // Check if the object is not null
+            if (obj != null) 
             {
                 obj.GetComponent<Rigidbody2D>().gravityScale = 0.5f;
             }

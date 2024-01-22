@@ -1,50 +1,112 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectClickHandler : MonoBehaviour
 {
-    // Invoked when the object is clicked
+    private SpriteRenderer rend;
+    public Sprite shootingCursor;
+
+    private static ObjectClickHandler _instance;
+    public static ObjectClickHandler Instance { get { return _instance; } }
+
+    private int totalObjects = 0;
+    private int destroyedObjects = 0;
+
+    public int scoreValue;
+
     public delegate void ObjectClickedAction(int points);
     public static event ObjectClickedAction OnObjectClicked;
 
-    // Update is called once per frame
+    private ScoreManager scoreManager;
+
+    void Awake()
+    {
+        _instance = this; // Set the instance when the script is first loaded
+    }
+
+    void Start()
+    {
+        Cursor.visible = false;
+        rend = GetComponent<SpriteRenderer>();
+
+        // Get the total number of objects in the scene
+        totalObjects = GameObject.FindGameObjectsWithTag("Destroyable").Length;
+
+        scoreManager = GameObject.Find("Global Object").GetComponent<ScoreManager>();
+    }
+
     void Update()
     {
+        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         // if the player has clicked (object)
         if (Input.GetMouseButtonDown(0)) // 0 represents the left mouse button
         {
-            // Send Raycast to check if the mouse click hit an object in 2D
+            CursorController.Instance.ShootSound();
+            
+            // Send Raycast to check if the mouse click
             Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
 
             if (hit.collider != null)
             {
-                // Log additional information for debugging
                 Debug.Log("Raycast hit object: " + hit.collider.gameObject.name);
                 Debug.Log("Object tag: " + hit.collider.tag);
 
-                // Check if the clicked object has a specific tag (you can customize this)
                 if (hit.collider.CompareTag("Destroyable"))
                 {
-                    // Notify subscribers that an object has been clicked
                     int points = GetPointsBasedOnLayer(hit.collider.gameObject.layer);
-                    OnObjectClicked?.Invoke(points);
+                    // OnObjectClicked?.Invoke(points);
 
-                    // Destroy the object
                     Destroy(hit.collider.gameObject);
+
+                    // Update the count of destroyed objects
+                    destroyedObjects++;
+
+                    scoreManager.IncrementScore(scoreValue);
+
+                    CursorController.Instance.EmitParticles(50);
                 }
             }
+
+            // Check if all objects are destroyed
+            // if (destroyedObjects == totalObjects)
+            // {
+            //     WinLose.EndGame(); // Assuming WinLose has a static EndGame method
+            // }
         }
     }
 
     int GetPointsBasedOnLayer(int layer)
     {
-        // Check if the layer is "red" and return points accordingly
+        // Check if the layer is "red" 
         if (LayerMask.LayerToName(layer) == "red")
         {
             return 50;
         }
 
-        // Default points if the layer doesn't match
+        // Default points
         return 25;
+    }
+
+    // Method to get the total number of objects
+    public int GetTotalObjects()
+    {
+        return totalObjects;
+    }
+
+    // Method to get the number of destroyed objects
+    public int GetDestroyedObjects()
+    {
+        return destroyedObjects;
+    }
+
+    // Method to get the total score
+    public int GetTotalScore()
+    {
+        // Implement your logic to calculate the total score
+        // This might involve summing up scores of all objects, etc.
+        return 0;
     }
 }

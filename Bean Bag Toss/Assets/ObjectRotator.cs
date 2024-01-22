@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectRotator : MonoBehaviour
 {
-    public float rotationSpeed = 60f; // Adjust the rotation speed as needed
+    public float rotationSpeed = 60f; 
 
     void Start()
     {

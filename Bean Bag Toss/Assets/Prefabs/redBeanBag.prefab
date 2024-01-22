@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7225332550866557954}
   - component: {fileID: 7790051752605688722}
   - component: {fileID: 8050279064797122577}
-  - component: {fileID: 990810265841227446}
   m_Layer: 6
   m_Name: redBeanBag
   m_TagString: Destroyable
@@ -120,7 +119,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -138,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b034bb46270308c49a31f75c3aeab2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingCursor: {fileID: 0}
+  scoreValue: 50
 --- !u!114 &8050279064797122577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,15 +152,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
---- !u!114 &990810265841227446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 912461809558666657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a238b09d228a9074ebe26f9e41cdae1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

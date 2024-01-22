@@ -52,5 +52,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.defaultSolution": "Bean Bag Toss.sln"
+    "dotnet.defaultSolution": "Bean Bag Toss.sln",
+    "dotnet.preferCSharpExtension": true
 }
