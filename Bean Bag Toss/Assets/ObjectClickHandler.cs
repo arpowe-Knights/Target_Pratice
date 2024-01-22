@@ -44,7 +44,7 @@ public class ObjectClickHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // 0 represents the left mouse button
         {
             CursorController.Instance.ShootSound();
-            
+
             // Send Raycast to check if the mouse click
             Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(clickPosition, Vector2.zero);
@@ -102,11 +102,5 @@ public class ObjectClickHandler : MonoBehaviour
         return destroyedObjects;
     }
 
-    // Method to get the total score
-    public int GetTotalScore()
-    {
-        // Implement your logic to calculate the total score
-        // This might involve summing up scores of all objects, etc.
-        return 0;
-    }
+
 }

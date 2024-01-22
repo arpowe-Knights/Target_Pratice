@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
 
     private float timer = 2;
 
-    private const int WinningScore = 4;
+    private const int WinningScore = 6;
 
     public AudioClip introSound;
     public AudioClip gameplaySong;
@@ -72,7 +72,8 @@ public class ScoreManager : MonoBehaviour
 
         else if (gameOver)
         {
-            timer -= Time.deltaTime;
+            timer = 0;
+            // timer -= Time.deltaTime;
 
         }
     }
